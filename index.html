@@ -6,6 +6,7 @@
         <title> 音ゲー 譜面エディタ </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="static/style/index.css">
+        <script src="static/js/main.js"></script>
     </head>
 
     <body>
@@ -22,7 +23,13 @@
             </div>
         </div>
 
-        <table border="1">
+        <label> 小節 </label><input type="text" id="numBar">
+        <button onclick="makeNewScore()"> 新規譜面作成 </button>
+
+        <br>
+        <br>
+        
+        <table border="1" id="score">
             <tr>
                 <th>行</th>
                 <th>0</th>
@@ -31,7 +38,7 @@
                 <th>3</th>
             </tr>
 
-            <tr>
+            <!-- <tr>
                 <th>4</th>
                 <td> <button id="notes_40" onclick="changeNotes(4, 0)"> ・ </button> </td>
                 <td> <button id="notes_41" onclick="changeNotes(4, 1)"> ・ </button> </td>
@@ -65,7 +72,7 @@
                 <td> <button id="notes_01" onclick="changeNotes(0, 1)"> ・ </button> </td>
                 <td> <button id="notes_02" onclick="changeNotes(0, 2)"> ・ </button> </td>
                 <td> <button id="notes_03" onclick="changeNotes(0, 3)"> ・ </button> </td>
-            </tr>
+            </tr> -->
         </table>
 
         <form>

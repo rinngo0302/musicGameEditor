@@ -49,3 +49,27 @@ async function move()
     //     nowNotes[i] = document.getElementById(`notes_${now}${i}`);
     // }
 }
+
+function makeNewScore()
+{
+    let numBar = document.getElementById("numBar");
+    alert(`${numBar.value}小節の譜面をつくります。`);
+
+    let score = document.getElementById("socre");
+    let emptyNotesTr = new Array();
+    let emptyNotesTd = new Array();
+    for (let i = 0; i < parseInt(numBar.value); i++)
+    {
+        emptyNotesTr.push(document.createElement("tr"));
+        for (let j = 0; j < 4; j++)
+        {
+            emptyNotesTd.push(document.createElement("td"));
+
+        }
+
+        score.insertBefore()
+    }
+
+    console.log(emptyNotesTr);
+    console.log(emptyNotesTd);
+}
