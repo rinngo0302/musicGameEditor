@@ -6,12 +6,13 @@
         <title> 音ゲー 譜面エディタ </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="static/style/index.css">
-        <script src="static/js/main.js"></script>
     </head>
+    
+    <script src="static/js/main.js"></script>
 
     <body>
         <h1> 音ゲー 譜面エディタ </h1>
-
+        
         <div class="controler">
             <div class="container">
                 <div id="cur"> ・ </div>
@@ -22,10 +23,10 @@
                 <button onclick="changeNotesMode('attack')"> アタック× </button>
             </div>
         </div>
-
+        
         <label> 小節 </label><input type="text" id="numBar">
         <button onclick="makeNewScore()"> 新規譜面作成 </button>
-
+        
         <br>
         <br>
         
@@ -79,4 +80,7 @@
 
         </form>
     </body>
+    <!-- <script>
+        makeNewScore();
+    </script> -->
 </html>

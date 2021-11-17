@@ -50,26 +50,26 @@ async function move()
     // }
 }
 
-function makeNewScore()
+async function makeNewScore()
 {
     let numBar = document.getElementById("numBar");
     alert(`${numBar.value}小節の譜面をつくります。`);
 
-    let score = document.getElementById("socre");
-    let emptyNotesTr = new Array();
-    let emptyNotesTd = new Array();
-    for (let i = 0; i < parseInt(numBar.value); i++)
+    let score = document.getElementById("score");
+    for (let i = numBar.value; i >= 0; i--)
     {
-        emptyNotesTr.push(document.createElement("tr"));
+        let tr = document.createElement("tr");
+        let th = document.createElement("th");
+        th.innerHTML = `${i}`;
+        tr.appendChild(th);
+
         for (let j = 0; j < 4; j++)
         {
-            emptyNotesTd.push(document.createElement("td"));
-
+            let td = document.createElement("td");
+            td.innerHTML = `<button id='notes_${i}${j}' onclick='changeNotes(${i}, ${j})'> ・ </button>`;
+            tr.appendChild(td);
         }
 
-        score.insertBefore()
+        score.appendChild(tr);
     }
-
-    console.log(emptyNotesTr);
-    console.log(emptyNotesTd);
 }
