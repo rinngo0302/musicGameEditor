@@ -49,3 +49,27 @@ async function move()
     //     nowNotes[i] = document.getElementById(`notes_${now}${i}`);
     // }
 }
+
+async function makeNewScore()
+{
+    let numBar = document.getElementById("numBar");
+    alert(`${numBar.value}小節の譜面をつくります。`);
+
+    let score = document.getElementById("score");
+    for (let i = numBar.value; i >= 0; i--)
+    {
+        let tr = document.createElement("tr");
+        let th = document.createElement("th");
+        th.innerHTML = `${i}`;
+        tr.appendChild(th);
+
+        for (let j = 0; j < 4; j++)
+        {
+            let td = document.createElement("td");
+            td.innerHTML = `<button id='notes_${i}${j}' onclick='changeNotes(${i}, ${j})'> ・ </button>`;
+            tr.appendChild(td);
+        }
+
+        score.appendChild(tr);
+    }
+}
