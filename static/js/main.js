@@ -6,12 +6,13 @@ const ATTACK = 4;
 let cursor = NONE;
 
 let now = 0;
+let maxSection = 0;
 
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
-async function changeNotes(row, line)
+async function changeNotes(section, row, line)
 {
-    let notes = document.getElementById(`notes_${row}${line}`);
+    let notes = document.getElementById(`notes_${section}${row}${line}`);
     notes.innerHTML = (notes.innerHTML === NOTES_SYMBOL[cursor]) ? NOTES_SYMBOL[NONE] : NOTES_SYMBOL[cursor];
 }
 
@@ -52,24 +53,51 @@ async function move()
 
 async function makeNewScore()
 {
+    maxSection++;
+
+    let bpm = document.getElementById("numBPM").value;
+
+    let section = document.createElement("th");
+    let bpmEl = document.createElement("input");
+    bpmEl.setAttribute("type", "text");
+    bpmEl.setAttribute("class", "bpm");
+    bpmEl.setAttribute("value", bpm);
     let numBar = document.getElementById("numBar");
-    alert(`${numBar.value}小節の譜面をつくります。`);
+    // alert(`${numBar.value}小節の譜面をつくります。`);
 
     let score = document.getElementById("score");
-    for (let i = numBar.value; i >= 0; i--)
+    for (let i = numBar.value; i > 0; i--)
     {
         let tr = document.createElement("tr");
         let th = document.createElement("th");
         th.innerHTML = `${i}`;
         tr.appendChild(th);
-
+        section.innerHTML = maxSection;
+        
         for (let j = 0; j < 4; j++)
         {
             let td = document.createElement("td");
-            td.innerHTML = `<button id='notes_${i}${j}' onclick='changeNotes(${i}, ${j})'> ・ </button>`;
+            td.innerHTML = `<button id='notes_${maxSection}${i}${j}' onclick='changeNotes(${maxSection}, ${i}, ${j})'> ・ </button>`;
             tr.appendChild(td);
         }
-
+        
+        tr.appendChild(section);
+        tr.appendChild(bpmEl);
         score.appendChild(tr);
     }
+
+}
+
+// onload = function()
+// {
+//     let form = document.forms.makeScore;
+//     form.selectAudioFile.addEventListener("change", function(e)
+//     {
+//         console.log(e);
+//     });
+// }
+
+async function selectAudioFile(e)
+{
+    console.log(e);
 }

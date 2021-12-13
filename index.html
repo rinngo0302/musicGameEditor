@@ -11,76 +11,86 @@
     <script src="static/js/main.js"></script>
 
     <body>
-        <h1> 音ゲー 譜面エディタ </h1>
-        
-        <div class="controler">
+        <header>
+            <h1> 音ゲー 譜面エディタ </h1>
+            
+            
+
+
+        </header>
+        <br>
+        <br>
+
+        <main>
             <div class="container">
-                <div id="cur"> ・ </div>
-                <button onclick="changeNotesMode('pointer')"> ポインタ・ </button>
-                <button onclick="changeNotesMode('tap')"> タップ〇 </button>
-                <button onclick="changeNotesMode('holdStart')"> ホールド始点 □ </button>
-                <button onclick="changeNotesMode('holdEnd')"> ホールド終点 ■ </button>
-                <button onclick="changeNotesMode('attack')"> アタック× </button>
+
+                <div class="makeScore">
+                    <form name="makeScore">
+                        <input name="selectAudioFile" type="file" onchange="selectAudioFile(event)"> <br><br>
+                        <label> 小節 </label><input type="text" id="numBar"> <br>
+                        <label> BPM </label> <input type="text" id="numBPM">      <br> <br>
+                        <button onclick="makeNewScore()"> 新規小節作成 </button> <br>
+                        <audio controls></audio>
+                    </form>
+                </div>
+
+                <div class="score">
+                    <table border="1" id="score">
+                        <tr>
+                            <th>行</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>小節</th>
+                            <th>BPM</th>
+                        </tr>
+                        
+                        <!-- <tr>
+                            <th>4</th>
+                            <td> <button id="notes_40" onclick="changeNotes(4, 0)"> ・ </button> </td>
+                            <td> <button id="notes_41" onclick="changeNotes(4, 1)"> ・ </button> </td>
+                            <td> <button id="notes_42" onclick="changeNotes(4, 2)"> ・ </button> </td>
+                            <td> <button id="notes_43" onclick="changeNotes(4, 3)"> ・ </button> </td>
+                            <td> <input class="bpm" type="text"> </td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td> <button id="notes_30" onclick="changeNotes(3, 0)"> ・ </button> </td>
+                            <td> <button id="notes_31" onclick="changeNotes(3, 1)"> ・ </button> </td>
+                            <td> <button id="notes_32" onclick="changeNotes(3, 2)"> ・ </button> </td>
+                            <td> <button id="notes_33" onclick="changeNotes(3, 3)"> ・ </button> </td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td> <button id="notes_20" onclick="changeNotes(2, 0)"> ・ </button> </td>
+                            <td> <button id="notes_21" onclick="changeNotes(2, 1)"> ・ </button> </td>
+                            <td> <button id="notes_22" onclick="changeNotes(2, 2)"> ・ </button> </td>
+                            <td> <button id="notes_23" onclick="changeNotes(2, 3)"> ・ </button> </td>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <td> <button id="notes_10" onclick="changeNotes(1, 0)"> ・ </button> </td>
+                            <td> <button id="notes_11" onclick="changeNotes(1, 1)"> ・ </button> </td>
+                            <td> <button id="notes_12" onclick="changeNotes(1, 2)"> ・ </button> </td>
+                            <td> <button id="notes_13" onclick="changeNotes(1, 3)"> ・ </button> </td>
+                            <th>1</th>
+                        </tr> -->
+                    </table>
+                    
+                </div>
+                
+                <div class="controler">
+                    <div id="cur"> ・ </div>
+                    <button onclick="changeNotesMode('pointer')"> ポインタ・ </button>
+                    <button onclick="changeNotesMode('tap')"> タップ〇 </button>
+                    <button onclick="changeNotesMode('holdStart')"> ホールド始点 □ </button>
+                    <button onclick="changeNotesMode('holdEnd')"> ホールド終点 ■ </button>
+                    <button onclick="changeNotesMode('attack')"> アタック× </button>
+                </div>
             </div>
-        </div>
-        
-        <label> 小節 </label><input type="text" id="numBar">
-        <button onclick="makeNewScore()"> 新規譜面作成 </button>
-        
-        <br>
-        <br>
-        
-        <table border="1" id="score">
-            <tr>
-                <th>行</th>
-                <th>0</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-            </tr>
+        </main>
 
-            <!-- <tr>
-                <th>4</th>
-                <td> <button id="notes_40" onclick="changeNotes(4, 0)"> ・ </button> </td>
-                <td> <button id="notes_41" onclick="changeNotes(4, 1)"> ・ </button> </td>
-                <td> <button id="notes_42" onclick="changeNotes(4, 2)"> ・ </button> </td>
-                <td> <button id="notes_43" onclick="changeNotes(4, 3)"> ・ </button> </td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td> <button id="notes_30" onclick="changeNotes(3, 0)"> ・ </button> </td>
-                <td> <button id="notes_31" onclick="changeNotes(3, 1)"> ・ </button> </td>
-                <td> <button id="notes_32" onclick="changeNotes(3, 2)"> ・ </button> </td>
-                <td> <button id="notes_33" onclick="changeNotes(3, 3)"> ・ </button> </td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td> <button id="notes_20" onclick="changeNotes(2, 0)"> ・ </button> </td>
-                <td> <button id="notes_21" onclick="changeNotes(2, 1)"> ・ </button> </td>
-                <td> <button id="notes_22" onclick="changeNotes(2, 2)"> ・ </button> </td>
-                <td> <button id="notes_23" onclick="changeNotes(2, 3)"> ・ </button> </td>
-            </tr>
-            <tr>
-                <th>1</th>
-                <td> <button id="notes_10" onclick="changeNotes(1, 0)"> ・ </button> </td>
-                <td> <button id="notes_11" onclick="changeNotes(1, 1)"> ・ </button> </td>
-                <td> <button id="notes_12" onclick="changeNotes(1, 2)"> ・ </button> </td>
-                <td> <button id="notes_13" onclick="changeNotes(1, 3)"> ・ </button> </td>
-            </tr>
-            <tr>
-                <th>0</th>
-                <td> <button id="notes_00" onclick="changeNotes(0, 0)"> ・ </button> </td>
-                <td> <button id="notes_01" onclick="changeNotes(0, 1)"> ・ </button> </td>
-                <td> <button id="notes_02" onclick="changeNotes(0, 2)"> ・ </button> </td>
-                <td> <button id="notes_03" onclick="changeNotes(0, 3)"> ・ </button> </td>
-            </tr> -->
-        </table>
-
-        <form>
-
-        </form>
+        <br><br><br>
     </body>
-    <!-- <script>
-        makeNewScore();
-    </script> -->
 </html>

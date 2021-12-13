@@ -2,24 +2,46 @@ body {
     text-align: center;
 }
 
-.controler {
-    position: fixed;
-    right: 20px;
+main {
 }
 
 .container {
     display: flex;
+    justify-content: center;
+}
+
+.makeScore {
+    display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
 
     height: 300px;
-
+    
     border-color: black;
     border-style: solid;
 
     padding-left: 50px;
     padding-right: 50px;
+
+    margin-right: 50px;
 }
+
+.controler {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    height: 300px;
+    
+    border-color: black;
+    border-style: solid;
+    
+    padding-left: 50px;
+    padding-right: 50px;
+
+    margin-left: 100px;
+}
+
 #cur {
     border-color: red;
     border-style: solid;
@@ -27,20 +49,32 @@ body {
     font-size: 50px;
 }
 
-
+.score {
+    overflow-y: scroll;
+    height: 700px;
+}
 table {
     margin: 0 auto;
 }
 
 th {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 
-    font-size: 30px;
+    font-size: 23px;
 }
 
 td button {
     font-size: 30px;
+}
+
+.bpm {
+    text-align: center;
+
+    width: 50px;
+    height: 30px;
+
+    font-size: 20px;
 }
 
 .now {
