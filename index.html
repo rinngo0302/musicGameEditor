@@ -25,13 +25,13 @@
             <div class="container">
 
                 <div class="makeScore">
-                    <form name="makeScore">
-                        <input name="selectAudioFile" type="file" onchange="selectAudioFile(event)"> <br><br>
+                    <div name="makeScore">
+                        <input type="file" onchange="selectMusic(event)"> <br><br>
                         <label> 小節 </label><input type="text" id="numBar"> <br>
                         <label> BPM </label> <input type="text" id="numBPM">      <br> <br>
                         <button onclick="makeNewScore()"> 新規小節作成 </button> <br>
                         <audio controls></audio>
-                    </form>
+                    </div>
                 </div>
 
                 <div class="score">

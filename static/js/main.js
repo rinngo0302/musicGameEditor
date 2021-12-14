@@ -10,6 +10,9 @@ let maxSection = 0;
 
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
+// 音声ファイル
+let audio;
+
 async function changeNotes(section, row, line)
 {
     let notes = document.getElementById(`notes_${section}${row}${line}`);
@@ -97,7 +100,22 @@ async function makeNewScore()
 //     });
 // }
 
-async function selectAudioFile(e)
+let reader;
+async function selectMusic(e)
 {
-    console.log(e);
+    let input = e.target;
+    if (input.files.length == 0)
+    {
+        return;
+    }
+
+    audio = input.files[0];
+    if (audio.type !== "audio/mpeg")
+    {
+        alert("MP3形式のファイルをロードしてください。");
+        return;
+    }
+
+    reader = new FileReader();
+    reader.readAsArrayBuffer(audiogi);
 }
