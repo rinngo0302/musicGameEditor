@@ -85,7 +85,6 @@ async function makeNewScore()
         tr.appendChild(bpmEl);
         score.appendChild(tr);
     }
-
 }
 
 // onload = function()
@@ -97,7 +96,22 @@ async function makeNewScore()
 //     });
 // }
 
+let file;
+let music;
 async function selectAudioFile(e)
 {
-    console.log(e);
+    file = document.getElementById("getFile").files[0];
+
+    music = new Audio(file.name);
+    music.play();
+}
+
+
+async function startMusic()
+{
+    music.play();
+}
+async function stopMusic()
+{
+    music.pause();
 }
