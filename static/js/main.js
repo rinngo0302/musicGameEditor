@@ -10,9 +10,6 @@ let maxSection = 0;
 
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
-// 音声ファイル
-let audio;
-
 async function changeNotes(section, row, line)
 {
     let notes = document.getElementById(`notes_${section}${row}${line}`);
@@ -88,7 +85,6 @@ async function makeNewScore()
         tr.appendChild(bpmEl);
         score.appendChild(tr);
     }
-
 }
 
 // onload = function()
@@ -100,22 +96,22 @@ async function makeNewScore()
 //     });
 // }
 
-let reader;
-async function selectMusic(e)
+let file;
+let music;
+async function selectAudioFile(e)
 {
-    let input = e.target;
-    if (input.files.length == 0)
-    {
-        return;
-    }
+    file = document.getElementById("getFile").files[0];
 
-    audio = input.files[0];
-    if (audio.type !== "audio/mpeg")
-    {
-        alert("MP3形式のファイルをロードしてください。");
-        return;
-    }
+    music = new Audio(file.name);
+    music.play();
+}
 
-    reader = new FileReader();
-    reader.readAsArrayBuffer(audiogi);
+
+async function startMusic()
+{
+    music.play();
+}
+async function stopMusic()
+{
+    music.pause();
 }
