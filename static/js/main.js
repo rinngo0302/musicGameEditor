@@ -8,6 +8,9 @@ let cursor = NONE;
 let now = 0;
 let maxSection = 0;
 
+// 赤の線(曲の位置)
+let nowSelected = 0;
+
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
 async function changeNotes(section, row, line)
@@ -69,35 +72,43 @@ async function makeNewScore()
     for (let i = numBar.value; i > 0; i--)
     {
         let tr = document.createElement("tr");
+        if (i === numBar.value)
+        {
+            tr.setAttribute("id", `tr_${maxSection}`);
+        }
         let th = document.createElement("th");
         th.innerHTML = `${i}`;
         tr.appendChild(th);
         section.innerHTML = maxSection;
         
         for (let j = 0; j < 4; j++)
-        {
+        {   
             let td = document.createElement("td");
             td.innerHTML = `<button id='notes_${maxSection}${i}${j}' onclick='changeNotes(${maxSection}, ${i}, ${j})'> ・ </button>`;
             tr.appendChild(td);
         }
         
+        let selectnow = document.createElement("td");
+        let selectButton = document.createElement("button");
+        selectButton.setAttribute("onclick", "selectNow()");
+        selectButton.setAttribute("id", `select_${i}`);
+        selectButton.innerHTML = "ー";
+
+        selectnow.appendChild(selectButton);
+        tr.appendChild(selectnow);
         tr.appendChild(section);
         tr.appendChild(bpmEl);
-        score.appendChild(tr);
+
+        let lastTr = document.getElementById(`tr_${maxSection}`);
+        let table = document.getElementsByTagName("table")[0];
+        table.insertBefore(tr, lastTr);
+        // score.appendChild(tr);
+        
     }
 }
 
-// onload = function()
-// {
-//     let form = document.forms.makeScore;
-//     form.selectAudioFile.addEventListener("change", function(e)
-//     {
-//         console.log(e);
-//     });
-// }
-
 let file;
-let music;
+let music;  // 曲のデータ
 async function selectAudioFile(e)
 {
     file = document.getElementById("getFile").files[0];
@@ -114,4 +125,9 @@ async function startMusic()
 async function stopMusic()
 {
     music.pause();
+}
+
+async function selectNow()
+{
+    let now = document.getElementById()
 }
