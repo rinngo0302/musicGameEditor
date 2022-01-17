@@ -130,23 +130,4 @@ async function stopMusic()
 async function selectNow()
 {
     let now = document.getElementById()
-=======
-let file;
-let music;
-async function selectAudioFile(e)
-{
-    file = document.getElementById("getFile").files[0];
-
-    music = new Audio(file.name);
-    music.play();
-}
-
-
-async function startMusic()
-{
-    music.play();
-}
-async function stopMusic()
-{
-    music.pause();
 }
