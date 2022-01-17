@@ -11,6 +11,9 @@ let maxSection = 0;
 // 赤の線(曲の位置)
 let nowSelected = 0;
 
+// 最後のライン
+let lastLine;
+
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
 async function changeNotes(section, row, line)
@@ -40,18 +43,7 @@ async function changeNotesMode(mode)
 
 async function move()
 {
-    // let nowNotes = new Array(4);
-    // for (let i = 0; i < 5; i++)
-    // {
-    //     for (let j = 0; j < 4; j++)
-    //     {
-    //         document.getElementById(`notes_${i}${j}`).firstChild.style.backgroundColor = "blue";
-    //     }
-    // }
-    // for (let i = 0; i < 4; i++)
-    // {
-    //     nowNotes[i] = document.getElementById(`notes_${now}${i}`);
-    // }
+
 }
 
 async function makeNewScore()
@@ -72,10 +64,6 @@ async function makeNewScore()
     for (let i = numBar.value; i > 0; i--)
     {
         let tr = document.createElement("tr");
-        if (i === numBar.value)
-        {
-            tr.setAttribute("id", `tr_${maxSection}`);
-        }
         let th = document.createElement("th");
         th.innerHTML = `${i}`;
         tr.appendChild(th);
@@ -103,7 +91,12 @@ async function makeNewScore()
         let table = document.getElementsByTagName("table")[0];
         table.insertBefore(tr, lastTr);
         // score.appendChild(tr);
-        
+
+        if (i === numBar.value || i === 0)
+        {
+            lastLine = document.getElementById()
+            console.log(`${lastLine}`);
+        }
     }
 }
 
