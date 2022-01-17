@@ -40,18 +40,7 @@ async function changeNotesMode(mode)
 
 async function move()
 {
-    // let nowNotes = new Array(4);
-    // for (let i = 0; i < 5; i++)
-    // {
-    //     for (let j = 0; j < 4; j++)
-    //     {
-    //         document.getElementById(`notes_${i}${j}`).firstChild.style.backgroundColor = "blue";
-    //     }
-    // }
-    // for (let i = 0; i < 4; i++)
-    // {
-    //     nowNotes[i] = document.getElementById(`notes_${now}${i}`);
-    // }
+
 }
 
 async function makeNewScore()
@@ -69,7 +58,7 @@ async function makeNewScore()
     // alert(`${numBar.value}小節の譜面をつくります。`);
 
     let score = document.getElementById("score");
-    for (let i = numBar.value; i > 0; i--)
+    for (let i = 1; i <= numBar.value; i++)
     {
         maxLine++;
 
@@ -92,13 +81,16 @@ async function makeNewScore()
         let selectnow = document.createElement("td");
         let selectButton = document.createElement("button");
         selectButton.setAttribute("onclick", "selectNow()");
-        selectButton.setAttribute("id", `select_${i}`);
+        selectButton.setAttribute("id", `select_${maxLine}`);
         selectButton.innerHTML = "ー";
         selectnow.appendChild(selectButton);
 
         tr.appendChild(selectnow);
-        tr.appendChild(section);
         tr.appendChild(bpmEl);
+        if (i === 1)
+        {
+            tr.appendChild(section);
+        }
 
         let lastTr = document.getElementById(`line_${maxLine - 1}`);
         let table = document.getElementsByTagName("table")[0];
@@ -107,7 +99,6 @@ async function makeNewScore()
 
         table.insertBefore(tr, lastTr);
         // score.appendChild(tr);
-        
     }
 }
 
@@ -133,5 +124,6 @@ async function stopMusic()
 
 async function selectNow()
 {
-    let now = document.getElementById()
+    let now = document.getElementById(`select_${maxLine}`);
+    console.log(now);
 }
