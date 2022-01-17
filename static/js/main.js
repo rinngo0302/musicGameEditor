@@ -5,8 +5,8 @@ const HOLD_END = 3;
 const ATTACK = 4;
 let cursor = NONE;
 
-let now = 0;
-let maxSection = 0;
+let maxLine = 0;    // 一番上のライン
+let maxSection = 0; // 何小節あるか
 
 // 赤の線(曲の位置)
 let nowSelected = 0;
@@ -71,11 +71,11 @@ async function makeNewScore()
     let score = document.getElementById("score");
     for (let i = numBar.value; i > 0; i--)
     {
+        maxLine++;
+
         let tr = document.createElement("tr");
-        if (i === numBar.value)
-        {
-            tr.setAttribute("id", `tr_${maxSection}`);
-        }
+        tr.setAttribute("id", `line_${maxLine}`);
+
         let th = document.createElement("th");
         th.innerHTML = `${i}`;
         tr.appendChild(th);
@@ -88,19 +88,23 @@ async function makeNewScore()
             tr.appendChild(td);
         }
         
+        // "-"のプログラム
         let selectnow = document.createElement("td");
         let selectButton = document.createElement("button");
         selectButton.setAttribute("onclick", "selectNow()");
         selectButton.setAttribute("id", `select_${i}`);
         selectButton.innerHTML = "ー";
-
         selectnow.appendChild(selectButton);
+
         tr.appendChild(selectnow);
         tr.appendChild(section);
         tr.appendChild(bpmEl);
 
-        let lastTr = document.getElementById(`tr_${maxSection}`);
+        let lastTr = document.getElementById(`line_${maxLine - 1}`);
         let table = document.getElementsByTagName("table")[0];
+
+        console.log(lastTr);
+
         table.insertBefore(tr, lastTr);
         // score.appendChild(tr);
         
