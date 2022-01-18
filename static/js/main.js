@@ -8,9 +8,6 @@ let cursor = NONE;
 let maxLine = 0;    // 一番上のライン
 let maxSection = 0; // 何小節あるか
 
-// 赤の線(曲の位置)
-let nowSelected = 0;
-
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
 async function changeNotes(section, row, line)
@@ -82,6 +79,7 @@ async function makeNewScore()
         let selectButton = document.createElement("button");
         selectButton.setAttribute("onclick", "selectNow()");
         selectButton.setAttribute("id", `select_${maxLine}`);
+        selectButton.setAttribute("onclick", `selectNow(${maxLine})`);
         selectButton.innerHTML = "ー";
         selectnow.appendChild(selectButton);
 
@@ -122,8 +120,13 @@ async function stopMusic()
     music.pause();
 }
 
-async function selectNow()
+async function selectNow(line)
 {
-    let now = document.getElementById(`select_${maxLine}`);
-    console.log(now);
+    for (let i = 1; i < maxLine + 1; i++)
+    {
+        document.getElementById(`select_${i}`).style.backgroundColor = "green";
+    }
+    let nowSelected = document.getElementById(`select_${maxLine}`);
+    nowSelected.style.backgroundColor = "red";
+
 }
