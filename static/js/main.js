@@ -128,5 +128,4 @@ async function selectNow(line)
     }
     let nowSelected = document.getElementById(`select_${maxLine}`);
     nowSelected.style.backgroundColor = "red";
-
 }
