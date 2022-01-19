@@ -9,6 +9,9 @@ let maxLine = 0;    // 一番上のライン
 let maxSection = 0; // 何小節あるか
 let nowLine = 1;
 
+let file;
+let music;  // 曲のデータ
+
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
 async function changeNotes(section, row, line)
@@ -81,7 +84,7 @@ async function makeNewScore()
         let selectButton = document.createElement("button");
         selectButton.setAttribute("onclick", "selectNow()");
         selectButton.setAttribute("id", `select_${maxLine}`);
-        selectButton.setAttribute("onclick", `selectNow(${maxLine})`);
+        selectButton.setAttribute("onclick", `selectNow(${maxLine});`);
         selectButton.innerHTML = "ー";
         selectnow.appendChild(selectButton);
 
@@ -94,8 +97,6 @@ async function makeNewScore()
 
         let lastTr = document.getElementById(`line_${maxLine - 1}`);
         let table = document.getElementsByTagName("table")[0];
-
-        console.log(lastTr);
 
         table.insertBefore(tr, lastTr);
         // score.appendChild(tr);
@@ -110,8 +111,6 @@ async function makeNewScore()
     }
 }
 
-let file;
-let music;  // 曲のデータ
 async function selectAudioFile(e)
 {
     file = document.getElementById("getFile").files[0];
@@ -143,4 +142,24 @@ async function selectNow(line)
 
     // 選択されている要素の選択
     nowLine = line;
+
+    calcSpeed();
+}
+
+// BPMから一つのノーツあたり何秒かかるかを計算
+async function calcSpeed()
+{
+    const section = document.getElementById(`section_`)
+    const bpm = document.getElementById(`bpm_${1}`).value;
+    speed = 60 / bpm;
+    console.log(`speed: ${speed}`);
+
+    return speed;
+
+    // setInterval(
+    //     function()
+    //     {
+    //         console.log("Next!");
+    //     }, speed * 1000
+    // );
 }
