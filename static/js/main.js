@@ -98,6 +98,14 @@ async function makeNewScore()
 
         table.insertBefore(tr, lastTr);
         // score.appendChild(tr);
+
+        // "_"の色変更
+        for (let i = 1; i < maxLine + 1; i++)
+        {
+            if (i === nowLine)
+                continue;
+            document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
+        }
     }
 }
 
@@ -132,5 +140,5 @@ async function selectNow(line)
     nowSelected.style.backgroundColor = "#aaaaaa";
 
     // 選択されている要素の選択
-    nowLine++;
+    nowLine = line;
 }
