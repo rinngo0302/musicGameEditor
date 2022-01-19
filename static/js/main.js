@@ -103,7 +103,7 @@ async function makeNewScore()
         // "_"の色変更
         for (let i = 1; i < maxLine + 1; i++)
         {
-            if (i === nowLine)
+            if (i === nowLine && i !== 1)
                 continue;
             document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
         }
