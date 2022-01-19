@@ -52,6 +52,7 @@ async function makeNewScore()
     bpmEl.setAttribute("type", "text");
     bpmEl.setAttribute("class", "bpm");
     bpmEl.setAttribute("value", bpm);
+    bpmEl.setAttribute("id", `bpm_${maxSection}`);
     let numBar = document.getElementById("numBar");
     // alert(`${numBar.value}小節の譜面をつくります。`);
 
@@ -123,6 +124,8 @@ async function selectAudioFile(e)
 async function startMusic()
 {
     music.play();
+
+    
 }
 async function stopMusic()
 {
@@ -132,12 +135,11 @@ async function stopMusic()
 async function selectNow(line)
 {
     // trの色変更
-    for (let i = 1; i < maxLine + 1; i++)
+    for (let i = 1; i <= maxLine; i++)
     {
         document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
     }
-    let nowSelected = document.getElementById(`select_${line}`);
-    nowSelected.style.backgroundColor = "#aaaaaa";
+    document.getElementById(`select_${line}`).style.backgroundColor = "#aaaaaa";
 
     // 選択されている要素の選択
     nowLine = line;
