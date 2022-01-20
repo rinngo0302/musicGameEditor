@@ -83,7 +83,8 @@ async function makeNewScore()
         let selectnow = document.createElement("td");
         let selectButton = document.createElement("button");
         selectButton.setAttribute("onclick", "selectNow()");
-        selectButton.setAttribute("id", `select_${maxLine}`);
+        selectButton.setAttribute("id", `select_${maxSection}${maxLine}`);
+        selectButton.setAttribute("name", `select`);
         selectButton.setAttribute("onclick", `selectNow(${maxLine});`);
         selectButton.innerHTML = "ー";
         selectnow.appendChild(selectButton);
@@ -102,11 +103,13 @@ async function makeNewScore()
         // score.appendChild(tr);
 
         // "_"の色変更
-        for (let i = 1; i < maxLine + 1; i++)
+        let select = document.getElementsByName("select");
+        for (let i = 0; i < maxLine; i++)
         {
             if (i === nowLine && i !== 1)
                 continue;
-            document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
+            select[i].style.backgroundColor = "#e4f5e1";
+            // document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
         }
     }
 }
@@ -122,9 +125,7 @@ async function selectAudioFile(e)
 
 async function startMusic()
 {
-    music.play();
-
-    
+    music.play();   
 }
 async function stopMusic()
 {
@@ -149,7 +150,7 @@ async function selectNow(line)
 // BPMから一つのノーツあたり何秒かかるかを計算
 async function calcSpeed()
 {
-    const section = document.getElementById(`section_`)
+    // const section = document.getElementsByName(`select`)[];
     const bpm = document.getElementById(`bpm_${1}`).value;
     speed = 60 / bpm;
     console.log(`speed: ${speed}`);
