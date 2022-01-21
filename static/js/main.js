@@ -5,12 +5,15 @@ const HOLD_END = 3;
 const ATTACK = 4;
 let cursor = NONE;
 
-let maxLine = 0;    // 一番上のライン
-let maxSection = 0; // 何小節あるか
-let nowLine = 1;
+let maxLine = 0;        // 一番上のライン
+let maxSection = 0;     // 何小節あるか
+let nowLine = 1;        // 何個目が選択されているか
+let nowSection = 1;     // 何小節目が選択されているか
+let nowSpeed = 0;       // 現在のBPMから計算したスピード(秒)
 
 let file;
 let music;  // 曲のデータ
+let isPlayingMusic = false;
 
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
@@ -59,7 +62,6 @@ async function makeNewScore()
     let numBar = document.getElementById("numBar");
     // alert(`${numBar.value}小節の譜面をつくります。`);
 
-    let score = document.getElementById("score");
     for (let i = 1; i <= numBar.value; i++)
     {
         maxLine++;
@@ -82,10 +84,9 @@ async function makeNewScore()
         // "-"のプログラム
         let selectnow = document.createElement("td");
         let selectButton = document.createElement("button");
-        selectButton.setAttribute("onclick", "selectNow()");
-        selectButton.setAttribute("id", `select_${maxSection}${maxLine}`);
+        selectButton.setAttribute("id", `select_${maxLine}`);
         selectButton.setAttribute("name", `select`);
-        selectButton.setAttribute("onclick", `selectNow(${maxLine});`);
+        selectButton.setAttribute("onclick", `selectNow(${maxSection}, ${maxLine});`);
         selectButton.innerHTML = "ー";
         selectnow.appendChild(selectButton);
 
@@ -119,48 +120,65 @@ async function selectAudioFile(e)
     file = document.getElementById("getFile").files[0];
 
     music = new Audio(file.name);
-    music.play();
+
+    calcSpeed();
+    updateSelection();
 }
 
 
 async function startMusic()
 {
-    music.play();   
+    isPlayingMusic = true;
+    music.play();
 }
 async function stopMusic()
 {
+    isPlayingMusic = false;
     music.pause();
 }
 
-async function selectNow(line)
+async function updateSelection()
+{
+    setInterval(function()
+    {
+        // calcSpeed();
+        if (isPlayingMusic && nowLine < maxLine)
+        {
+            console.log("Playing!");
+            nowLine++;
+            showSelection();
+        } else {
+            isPlayingMusic = false;
+            console.log("Not Playing!");
+        }
+    }, nowSpeed * 1000);
+}
+
+async function selectNow(section, line)
+{
+    // 選択されている要素の選択
+    nowLine = line;
+    nowSection = section;
+
+    showSelection();
+}
+
+async function showSelection()
 {
     // trの色変更
     for (let i = 1; i <= maxLine; i++)
     {
         document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
     }
-    document.getElementById(`select_${line}`).style.backgroundColor = "#aaaaaa";
-
-    // 選択されている要素の選択
-    nowLine = line;
-
-    calcSpeed();
+    document.getElementById(`select_${nowLine}`).style.backgroundColor = "#aaaaaa";
 }
 
 // BPMから一つのノーツあたり何秒かかるかを計算
 async function calcSpeed()
 {
-    // const section = document.getElementsByName(`select`)[];
-    const bpm = document.getElementById(`bpm_${1}`).value;
-    speed = 60 / bpm;
-    console.log(`speed: ${speed}`);
-
-    return speed;
-
-    // setInterval(
-    //     function()
-    //     {
-    //         console.log("Next!");
-    //     }, speed * 1000
-    // );
+    setInterval(function()
+    {
+        const bpm = document.getElementById(`bpm_${nowSection}`).value;
+        nowSpeed = 60 / bpm;
+    }, 1);
 }
