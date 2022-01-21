@@ -10,6 +10,7 @@ let maxSection = 0;     // 何小節あるか
 let nowLine = 1;        // 何個目が選択されているか
 let nowSection = 1;     // 何小節目が選択されているか
 let nowSpeed = 0;       // 現在のBPMから計算したスピード(秒)
+let allSection = new Array();// 全ての小節数
 
 let file;
 let music;  // 曲のデータ
@@ -112,7 +113,10 @@ async function makeNewScore()
             select[i].style.backgroundColor = "#e4f5e1";
             // document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
         }
+
     }
+
+    allSection.append(numBar.value);
 }
 
 async function selectAudioFile(e)
