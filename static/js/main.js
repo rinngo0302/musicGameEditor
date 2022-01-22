@@ -10,7 +10,8 @@ let maxSection = 0;     // 何小節あるか
 let nowLine = 1;        // 何個目が選択されているか
 let nowSection = 1;     // 何小節目が選択されているか
 let nowSpeed = 0;       // 現在のBPMから計算したスピード(秒)
-let allSection = new Array();// 全ての小節数
+let allMaxLine = new Array();// 全てのmaxLine
+let nowBPM = 0;
 
 let file;
 let music;  // 曲のデータ
@@ -92,10 +93,10 @@ async function makeNewScore()
         selectnow.appendChild(selectButton);
 
         tr.appendChild(selectnow);
-        tr.appendChild(bpmEl);
         if (i === 1)
         {
             tr.appendChild(section);
+            tr.appendChild(bpmEl);
         }
 
         let lastTr = document.getElementById(`line_${maxLine - 1}`);
@@ -106,17 +107,12 @@ async function makeNewScore()
 
         // "_"の色変更
         let select = document.getElementsByName("select");
-        for (let i = 0; i < maxLine; i++)
-        {
-            if (i === nowLine && i !== 1)
-                continue;
-            select[i].style.backgroundColor = "#e4f5e1";
-            // document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
-        }
+
+        showSelection();
 
     }
 
-    allSection.append(numBar.value);
+    allMaxLine.push(maxLine);
 }
 
 async function selectAudioFile(e)
@@ -133,6 +129,7 @@ async function selectAudioFile(e)
 async function startMusic()
 {
     isPlayingMusic = true;
+    updateSelection();
     music.play();
 }
 async function stopMusic()
@@ -143,34 +140,41 @@ async function stopMusic()
 
 async function updateSelection()
 {
-    // setInterval(function()
-    // {
-    //     calcSpeed();
-    //     if (isPlayingMusic && nowLine < maxLine)
-    //     {
-    //         console.log("Playing!");
-    //         nowLine++;
-    //         showSelection();
-    //     } else {
-    //         isPlayingMusic = false;
-    //         console.log("Not Playing!");
-    //     }
-    // }, nowSpeed * 1000);
-    while (true)
+    setTimeout(async function()
     {
-        setTimeout(function()
+        await calcSpeed();
+        if (isPlayingMusic && nowLine < maxLine)
         {
-            calcSpeed();
-            if (isPlayingMusic && nowLine < maxLine)
+            console.log("Playing!");
+            nowLine++;
+            setNowSectionFromNowLine();
+            
+            if (nowBPM !== document.getElementById(`bpm_${nowSection}`).value)
             {
-                console.log("Playing!");
-                nowLine++;
-                showSelection();
-            } else {
-                isPlayingMusic = false;
-                console.log("Not Playing!");
+                clearInterval();
+                await calcSpeed();
+                console.log(`BPM was changed!!\nBPM: ${nowBPM}, Speed: ${nowSpeed}`);
             }
-        }, nowSpeed * 1000);
+
+            showSelection();
+
+            updateSelection();
+        } else {
+            stopMusic();
+            console.log("Not Playing!");
+        }
+    }, nowSpeed * 1000);
+}
+
+async function setNowSectionFromNowLine()
+{
+    for (let i = 0; i < allMaxLine.length; i++)
+    {
+        if (nowLine <= allMaxLine[i])
+        {
+            nowSection = i + 1;
+            return;
+        }
     }
 }
 
@@ -181,6 +185,8 @@ async function selectNow(section, line)
     nowSection = section;
 
     showSelection();
+
+    updateSelection();
 }
 
 async function showSelection()
@@ -196,6 +202,6 @@ async function showSelection()
 // BPMから一つのノーツあたり何秒かかるかを計算
 async function calcSpeed()
 {
-    const bpm = document.getElementById(`bpm_${nowSection}`).value;
-    nowSpeed = 60 / bpm;
+    nowBPM = document.getElementById(`bpm_${nowSection}`).value;
+    nowSpeed = 60 / nowBPM;
 }
