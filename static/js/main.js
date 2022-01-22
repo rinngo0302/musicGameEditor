@@ -143,19 +143,35 @@ async function stopMusic()
 
 async function updateSelection()
 {
-    setInterval(function()
+    // setInterval(function()
+    // {
+    //     calcSpeed();
+    //     if (isPlayingMusic && nowLine < maxLine)
+    //     {
+    //         console.log("Playing!");
+    //         nowLine++;
+    //         showSelection();
+    //     } else {
+    //         isPlayingMusic = false;
+    //         console.log("Not Playing!");
+    //     }
+    // }, nowSpeed * 1000);
+    while (true)
     {
-        // calcSpeed();
-        if (isPlayingMusic && nowLine < maxLine)
+        setTimeout(function()
         {
-            console.log("Playing!");
-            nowLine++;
-            showSelection();
-        } else {
-            isPlayingMusic = false;
-            console.log("Not Playing!");
-        }
-    }, nowSpeed * 1000);
+            calcSpeed();
+            if (isPlayingMusic && nowLine < maxLine)
+            {
+                console.log("Playing!");
+                nowLine++;
+                showSelection();
+            } else {
+                isPlayingMusic = false;
+                console.log("Not Playing!");
+            }
+        }, nowSpeed * 1000);
+    }
 }
 
 async function selectNow(section, line)
@@ -180,9 +196,6 @@ async function showSelection()
 // BPMから一つのノーツあたり何秒かかるかを計算
 async function calcSpeed()
 {
-    setInterval(function()
-    {
-        const bpm = document.getElementById(`bpm_${nowSection}`).value;
-        nowSpeed = 60 / bpm;
-    }, 1);
+    const bpm = document.getElementById(`bpm_${nowSection}`).value;
+    nowSpeed = 60 / bpm;
 }
