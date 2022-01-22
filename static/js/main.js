@@ -11,7 +11,7 @@ let nowLine = 1;        // 何個目が選択されているか
 let nowSection = 1;     // 何小節目が選択されているか
 let nowSpeed = 0;       // 現在のBPMから計算したスピード(秒)
 let allMaxLine = new Array();// 全てのmaxLine
-let nowBPM = 0;
+let nowBPM = 0;         // 現在のBPM
 
 let file;
 let music;  // 曲のデータ
@@ -204,4 +204,20 @@ async function calcSpeed()
 {
     nowBPM = document.getElementById(`bpm_${nowSection}`).value;
     nowSpeed = 60 / nowBPM;
+}
+
+
+async function deleteSection()
+{
+    let deleteNotesId = allMaxLine[maxSection - 2] + 1;
+    console.log(deleteNotesId);
+
+    for (let i = allMaxLine[maxSection - 1]; i >= deleteNotesId; i--)
+    {
+        let lineEl = document.getElementById(`line_${i}`);
+        lineEl.remove();
+        maxLine--;
+    }
+
+    maxSection--;
 }
