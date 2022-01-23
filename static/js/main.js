@@ -105,9 +105,6 @@ async function makeNewScore()
         table.insertBefore(tr, lastTr);
         // score.appendChild(tr);
 
-        // "_"の色変更
-        let select = document.getElementsByName("select");
-
         showSelection();
 
     }
@@ -209,7 +206,20 @@ async function calcSpeed()
 
 async function deleteSection()
 {
+    if (maxSection <= 0)
+    {
+        alert("これ以上は削除できません。");
+        return;
+    }
+
+    
     let deleteNotesId = allMaxLine[maxSection - 2] + 1;
+
+    if (maxSection === 1)
+    {
+        deleteNotesId = 1;
+    }
+
     console.log(deleteNotesId);
 
     for (let i = allMaxLine[maxSection - 1]; i >= deleteNotesId; i--)
@@ -218,6 +228,9 @@ async function deleteSection()
         lineEl.remove();
         maxLine--;
     }
-
+    
+    allMaxLine.pop();
     maxSection--;
+
+    console.log(`maxSection: ${maxSection}\nmaxLine: ${maxLine}`);
 }
