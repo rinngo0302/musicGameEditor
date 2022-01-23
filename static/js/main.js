@@ -174,6 +174,16 @@ async function setNowSectionFromNowLine()
         }
     }
 }
+function getSectionFromLine(line)
+{
+    for (let i = 0; i < allMaxLine.length; i++)
+    {
+        if (line <= allMaxLine[i])
+        {
+            return i + 1;
+        }
+    }
+}
 
 async function selectNow(section, line)
 {
@@ -183,6 +193,7 @@ async function selectNow(section, line)
 
     showSelection();
 
+    setCurrentTime();
     updateSelection();
 }
 
@@ -233,4 +244,17 @@ async function deleteSection()
     maxSection--;
 
     console.log(`maxSection: ${maxSection}\nmaxLine: ${maxLine}`);
+}
+
+async function setCurrentTime()
+{
+    let tmpCurrent = 0;
+    for (let i = 1; i < nowLine; i++)
+    {
+        // let bpm = document.getElementById(`bpm_${getSectionFromLine(i)}`).value;
+        let speed = 60 / nowBPM;
+        tmpCurrent += speed;
+    }
+    music.currentTime = tmpCurrent;
+    // console.log(music.currentTime);
 }
