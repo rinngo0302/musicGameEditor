@@ -11,6 +11,7 @@ let nowLine = 1;        // 何個目が選択されているか
 let nowSection = 1;     // 何小節目が選択されているか
 let nowSpeed = 0;       // 現在のBPMから計算したスピード(秒)
 let allMaxLine = new Array();// 全てのmaxLine
+let allSection = new Array();// 全てのLine
 let nowBPM = 0;         // 現在のBPM
 
 let file;
@@ -110,6 +111,7 @@ async function makeNewScore()
     }
 
     allMaxLine.push(maxLine);
+    allSection.push(numBar.value);
 }
 
 async function selectAudioFile(e)
@@ -212,6 +214,7 @@ async function calcSpeed()
 {
     nowBPM = document.getElementById(`bpm_${nowSection}`).value;
     nowSpeed = 60 / nowBPM;
+    nowSpeed *= 4 / allSection[nowSection - 1];
 }
 
 
