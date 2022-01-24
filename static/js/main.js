@@ -20,6 +20,12 @@ let isPlayingMusic = false;
 
 const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
 
+onload = function()
+{
+    let score = document.getElementById("score");
+    score.style.height = `${window.innerHeight - 200}px`;
+}
+
 async function changeNotes(section, row, line)
 {
     let notes = document.getElementById(`notes_${section}${row}${line}`);
