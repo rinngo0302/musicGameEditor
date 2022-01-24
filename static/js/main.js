@@ -125,6 +125,7 @@ async function selectAudioFile(e)
     file = document.getElementById("getFile").files[0];
 
     music = new Audio(file.name);
+    music.currentTime = 0;
 
     calcSpeed();
     updateSelection();
@@ -250,6 +251,7 @@ async function deleteSection()
     }
     
     allMaxLine.pop();
+    allSection.pop();
     maxSection--;
 
     console.log(`maxSection: ${maxSection}\nmaxLine: ${maxLine}`);
@@ -258,12 +260,14 @@ async function deleteSection()
 async function setCurrentTime()
 {
     let tmpCurrent = 0;
-    for (let i = 1; i < nowLine; i++)
+    for (let i = 1; i < nowSection; i++)
     {
         // let bpm = document.getElementById(`bpm_${getSectionFromLine(i)}`).value;
         let speed = 60 / nowBPM;
+        speed *=  4 / allSection[nowSection - 1];
         tmpCurrent += speed;
+        console.log(speed);
     }
     music.currentTime = tmpCurrent;
-    // console.log(music.currentTime);
+    console.log(music.currentTime);
 }

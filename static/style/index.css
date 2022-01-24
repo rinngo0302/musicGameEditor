@@ -81,6 +81,11 @@ main {
     margin-left: 100px;
 }
 
+tr, th, td {
+    width: 10px;
+    height: 10px;
+}
+
 #cur {
     border-color: red;
     border-style: solid;
