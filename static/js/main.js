@@ -259,14 +259,17 @@ async function deleteSection()
 
 async function setCurrentTime()
 {
+    calcSpeed();
     let tmpCurrent = 0;
-    for (let i = 1; i < nowSection; i++)
+    for (let i = 1; i < nowLine; i++)
     {
         // let bpm = document.getElementById(`bpm_${getSectionFromLine(i)}`).value;
-        let speed = 60 / nowBPM;
-        speed *=  4 / allSection[nowSection - 1];
-        tmpCurrent += speed;
+        let speed = 0;
+        speed = 60 / nowBPM;
         console.log(speed);
+        speed *= 4 / allSection[nowSection - 1];
+        tmpCurrent += speed;
+        // console.log(speed);
     }
     music.currentTime = tmpCurrent;
     console.log(music.currentTime);
