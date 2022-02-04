@@ -10,10 +10,10 @@ async function readFile(e)
     reader.addEventListener("load", function()
     {
         text = reader.result;
-        for (let i = 0; i < text.length; i++)
-        {
-            console.log(text[i]);
-        }
+        // for (let i = 0; i < text.length; i++)
+        // {
+        //     console.log(text[i]);
+        // }
         getReader();
     });
 }
@@ -28,49 +28,49 @@ async function getReader()
     }
 
     let num = 0;
-    let i = 0;
-
+    let now = 1;
+    
     while (true)
     {
+        let i = 0;
+        
         let getc = "";
         while (true)
         {
-            if (text[textCursor] === "/")
+            if (text[now] === "/")
             {
-                while (text[textCursor] != "\n" && text[textCursor] != "\r")
+                while (text[now] != "\r" && text[now] != "\n")  // "/"があったら改行までループ
                 {
-                    console.log(`${textCursor}: ${text[textCursor]}`);
-                    textCursor += 1;
+                    now++;
+                    console.log(text[now]);
                 }
+                now += 2;
             }
-
-            if (text[textCursor] == "\n" || text[textCursor] == "," || text[textCursor] == "\r")
+            
+            if (text[now] === "," || text[now] === "\n" || text[now] === "\r")
             {
-                console.log(`${textCursor - 1}: ${getc}`);
                 data[num][i] = getc;
+                console.log(`getc: ${getc}`);
                 getc = "";
-                textCursor++;
                 i++;
-                console.log(getc);
             } else {
-                // console.log(getc);
-                getc += text[textCursor];
-                textCursor++;
+                getc += text[now];
+                console.log(`${now}: ${getc}`);
             }
 
-            if (textCursor % data[i].length === 0)
+            now++;
+
+            if (i === 7)
             {
-                // console.log("num");
-                console.log(data[i]);
+                console.log(`i: ${getc}`);
                 break;
             }
-            // console.log(data[num][i]);
         }
-        if (num >= 16)
+
+        if (num === 10)
         {
             break;
         }
         num++;
     }
-
 }
