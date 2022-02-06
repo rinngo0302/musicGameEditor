@@ -37,6 +37,10 @@ async function getReader()
         let getc = "";
         while (true)
         {
+            if (i === 0)
+            {
+                console.log(`iが一番目だよ！\nnum: ${num}\ngetc: ${getc}\nnow: ${now}\ntext[now]: ${text[now]}`);
+            }
             if (text[now] === "/")
             {
                 while (text[now] != "\r" && text[now] != "\n")  // "/"があったら改行までループ
@@ -53,6 +57,10 @@ async function getReader()
                 console.log(`getc: ${getc}`);
                 getc = "";
                 i++;
+                if (text[now] != ",")
+                {
+                    now++;
+                }
             } else {
                 getc += text[now];
                 console.log(`${now}: ${getc}`);
@@ -60,7 +68,7 @@ async function getReader()
 
             now++;
 
-            if (i === 7)
+            if (i === 6)
             {
                 console.log(`i: ${getc}`);
                 break;
