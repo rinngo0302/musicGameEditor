@@ -1,4 +1,5 @@
 let text;
+let data;
 
 async function readFile(e)
 {
@@ -10,19 +11,29 @@ async function readFile(e)
     reader.addEventListener("load", function()
     {
         text = reader.result;
-        // for (let i = 0; i < text.length; i++)
-        // {
-        //     console.log(text[i]);
-        // }
-        getReader();
+
+        let line = 0;
+        let now = 0;
+        for (let i = 0; i < text.length; i++)
+        {
+            if (text[now] === "\n") 
+            {
+                line++;
+            }
+            now++;
+        }
+        line--;
+        console.log(`line: ${line}`);
+        
+        getReader(line);
     });
 }
 
-let data = new Array(17);
 let textCursor = 0;
-async function getReader()
+async function getReader(line)
 {
-    for (let i = 0; i < data.length; i++)
+    data = new Array(line + 1);
+    for (let i = 0; i < line + 1; i++)
     {
         data[i] = new Array(6);
     }
@@ -51,7 +62,7 @@ async function getReader()
                 now += 2;
             }
             
-            if (text[now] === "," || text[now] === "\n" || text[now] === "\r")
+            if (text[now] === "," || text[now] === "\n" || text[now] === "\r" || now === text.length)
             {
                 data[num][i] = getc;
                 console.log(`getc: ${getc}`);
@@ -70,13 +81,14 @@ async function getReader()
 
             if (i === 6)
             {
-                console.log(`i: ${getc}`);
+                alert(`i: ${i}\nnum: ${num}\nnow: ${now}\ntext[now]: ${text[now]}`);
                 break;
             }
         }
-
-        if (num === 10)
+        
+        if (num >= line)
         {
+            alert("終了！");
             break;
         }
         num++;
