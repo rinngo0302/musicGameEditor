@@ -65,7 +65,7 @@ async function getReader(line)
             if (text[now] === "," || text[now] === "\n" || text[now] === "\r" || now === text.length)
             {
                 data[num][i] = getc;
-                // console.log(`getc: ${getc}`);
+                console.log(`getc: ${getc}`);
                 getc = "";
                 i++;
                 if (text[now] != ",")
