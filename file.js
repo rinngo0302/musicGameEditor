@@ -50,9 +50,14 @@ async function getReader()
             if (text[now] === "," || text[now] === "\n" || text[now] === "\r")
             {
                 data[num][i] = getc;
-                console.log(`getc: ${getc}`);
+                // console.log(`getc: ${getc}`);
                 getc = "";
                 i++;
+                if (i === 6)
+                {
+                    console.log(`i: ${getc}`);
+                    break;
+                }
             } else {
                 getc += text[now];
                 console.log(`${now}: ${getc}`);
@@ -60,11 +65,6 @@ async function getReader()
 
             now++;
 
-            if (i === 7)
-            {
-                console.log(`i: ${getc}`);
-                break;
-            }
         }
 
         if (num === 10)
