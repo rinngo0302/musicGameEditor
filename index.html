@@ -9,6 +9,7 @@
     </head>
     
     <script src="static/js/main.js"></script>
+    <script src="static/js/fileImport.js"></script>
     <script src="static/js/fileExport.js"></script>
 
     <body>
@@ -50,14 +51,21 @@
                     </table>    
                 </div>
                 
-                <div class="controler">
-                    <div id="cur"> ・ </div>
-                    <button onclick="changeNotesMode('pointer')"> ポインタ・ </button>
-                    <button onclick="changeNotesMode('tap')"> タップ〇 </button>
-                    <button onclick="changeNotesMode('holdStart')"> ホールド始点 □ </button>
-                    <button onclick="changeNotesMode('holdEnd')"> ホールド終点 ■ </button>
-                    <button onclick="changeNotesMode('attack')"> アタック× </button>
-                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <div class="controler">
+                        <div id="cur"> ・ </div>
+                        <button onclick="changeNotesMode('pointer')"> ポインタ・ </button>
+                        <button onclick="changeNotesMode('tap')"> タップ〇 </button>
+                        <button onclick="changeNotesMode('holdStart')"> ホールド始点 □ </button>
+                        <button onclick="changeNotesMode('holdEnd')"> ホールド終点 ■ </button>
+                        <button onclick="changeNotesMode('attack')"> アタック× </button>
+                    </div>
+    
+                    <div class="controler" style="width: 100px;">
+                        <input type="file" onchange="readFile(event)">
+                        <button id="fileExport" onclick="fileExport"> DL </button>
+                    </div>
+                </div>         
             </div>
         </main>
 
