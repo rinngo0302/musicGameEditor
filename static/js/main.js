@@ -1,10 +1,11 @@
-const NONE = 0;
-const TAP = 1;
-const HOLD_START = 2;
-const HOLD_END = 3;
-const ATTACK = 4;
+const NONE = -1;
+const TAP = 0;
+const HOLD_START = 1;
+const HOLD_END = 2;
+const ATTACK = 3;
 let cursor = NONE;
 
+let score = new Array();// 譜面のデータ
 let maxLine = 0;        // 一番上のライン
 let maxSection = 0;     // 何小節あるか
 let nowLine = 1;        // 何個目が選択されているか
@@ -18,7 +19,8 @@ let file;
 let music;  // 曲のデータ
 let isPlayingMusic = false;
 
-const NOTES_SYMBOL = ["・", "〇", "□", "■", "×"];
+let NOTES_SYMBOL = ["〇", "□", "■", "×"];
+NOTES_SYMBOL[-1] = "・";
 
 onload = function()
 {
@@ -30,6 +32,8 @@ async function changeNotes(section, row, line)
 {
     let notes = document.getElementById(`notes_${section}${row}${line}`);
     notes.innerHTML = (notes.innerHTML === NOTES_SYMBOL[cursor]) ? NOTES_SYMBOL[NONE] : NOTES_SYMBOL[cursor];
+
+    score[row - 1][line] = `${cursor}`;
 }
 
 async function changeNotesMode(mode)
@@ -56,8 +60,10 @@ async function move()
 
 }
 
+let hasSet = false;
 async function makeNewScore()
 {
+    hasSet = false;
     maxSection++;
 
     let bpm = document.getElementById("numBPM").value;
@@ -73,6 +79,21 @@ async function makeNewScore()
 
     for (let i = 1; i <= numBar.value; i++)
     {
+        // 譜面のデータの配列
+        score.push(new Array(6));
+        if (!hasSet)
+        {
+            score[maxLine][5] = `${maxSection}`;
+            score[maxLine][4] = bpm;   // BPM設定
+
+            hasSet = true;
+        }
+
+        // 配列の初期化
+        for (let i = 0; i < 4; i++)
+        {
+            score[maxLine][i] = "-1";
+        }
         maxLine++;
 
         let tr = document.createElement("tr");
@@ -118,6 +139,8 @@ async function makeNewScore()
 
     allMaxLine.push(maxLine);
     allSection.push(numBar.value);
+
+    hasSet = true;
 }
 
 async function selectAudioFile(e)
