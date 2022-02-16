@@ -28,12 +28,12 @@ onload = function()
     score.style.height = `${window.innerHeight - 200}px`;
 }
 
-async function changeNotes(section, row, line)
+async function changeNotes(section, row, line, mLine)
 {
     let notes = document.getElementById(`notes_${section}${row}${line}`);
     notes.innerHTML = (notes.innerHTML === NOTES_SYMBOL[cursor]) ? NOTES_SYMBOL[NONE] : NOTES_SYMBOL[cursor];
 
-    score[row - 1][line] = `${cursor}`;
+    score[mLine - 1][line] = `${cursor}`;
 }
 
 async function changeNotesMode(mode)
@@ -107,7 +107,7 @@ async function makeNewScore()
         for (let j = 0; j < 4; j++)
         {   
             let td = document.createElement("td");
-            td.innerHTML = `<button id='notes_${maxSection}${i}${j}' onclick='changeNotes(${maxSection}, ${i}, ${j})'> ・ </button>`;
+            td.innerHTML = `<button id='notes_${maxSection}${i}${j}' onclick='changeNotes(${maxSection}, ${i}, ${j}, ${maxLine})'> ・ </button>`;
             tr.appendChild(td);
         }
         
@@ -271,11 +271,13 @@ async function deleteSection()
         let lineEl = document.getElementById(`line_${i}`);
         lineEl.remove();
         maxLine--;
+
+        score.pop();
     }
-    
     allMaxLine.pop();
     allSection.pop();
     maxSection--;
+    
 
     console.log(`maxSection: ${maxSection}\nmaxLine: ${maxLine}`);
 }
