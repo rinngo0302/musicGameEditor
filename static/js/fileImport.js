@@ -64,7 +64,12 @@ async function getReader(line)
             
             if (text[now] === "," || text[now] === "\n" || text[now] === "\r" || now === text.length)
             {
-                data[num][i] = getc;
+                if (getc === "")
+                {
+                    data[num][i] = undefined;
+                } else {
+                    data[num][i] = getc;
+                }
                 console.log(`getc: ${getc}`);
                 getc = "";
                 i++;
@@ -81,14 +86,14 @@ async function getReader(line)
 
             if (i === 6)
             {
-                alert(`i: ${i}\nnum: ${num}\nnow: ${now}\ntext[now]: ${text[now]}`);
+                // alert(`i: ${i}\nnum: ${num}\nnow: ${now}\ntext[now]: ${text[now]}`);
                 break;
             }
         }
         
         if (num >= line)
         {
-            alert("終了！");
+            // alert("終了！");
             break;
         }
         num++;

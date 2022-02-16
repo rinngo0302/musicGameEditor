@@ -8,7 +8,7 @@ async function convertArryToString()
         {
             if (score[i][j] === undefined)
             {
-                alert(`i: ${i}\nj: ${j}\ntext: ${text}`);
+                // alert(`i: ${i}\nj: ${j}\ntext: ${text}`);
                 text += ",";
                 continue;
             }
@@ -24,7 +24,7 @@ async function convertArryToString()
                 continue;
             }
             text += ",";
-            alert(`i: ${i}\nj: ${j}\ntext: ${text}`);
+            // alert(`i: ${i}\nj: ${j}\ntext: ${text}`);
         }
 
         // text += ",";
