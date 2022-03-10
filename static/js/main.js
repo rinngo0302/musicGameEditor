@@ -55,12 +55,8 @@ async function changeNotesMode(mode)
     document.getElementById("cur").innerHTML = NOTES_SYMBOL[cursor];
 }
 
-async function move()
-{
-
-}
-
 let hasSet = false;
+
 async function makeNewScore()
 {
     hasSet = false;

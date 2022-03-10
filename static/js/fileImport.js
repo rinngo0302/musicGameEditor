@@ -1,5 +1,4 @@
 let text;
-let data;
 
 async function readFile(e)
 {
@@ -26,16 +25,18 @@ async function readFile(e)
         console.log(`line: ${line}`);
         
         getReader(line);
+
+        makeScoreFromScoreData();
     });
 }
 
 let textCursor = 0;
-async function getReader(line)
+function getReader(line)
 {
-    data = new Array(line + 1);
+    score = new Array(line + 1);
     for (let i = 0; i < line + 1; i++)
     {
-        data[i] = new Array(6);
+        score[i] = new Array(6);
     }
 
     let num = 0;
@@ -66,9 +67,9 @@ async function getReader(line)
             {
                 if (getc === "")
                 {
-                    data[num][i] = undefined;
+                    score[num][i] = undefined;
                 } else {
-                    data[num][i] = getc;
+                    score[num][i] = getc;
                 }
                 console.log(`getc: ${getc}`);
                 getc = "";
@@ -86,7 +87,6 @@ async function getReader(line)
 
             if (i === 6)
             {
-                // alert(`i: ${i}\nnum: ${num}\nnow: ${now}\ntext[now]: ${text[now]}`);
                 break;
             }
         }
@@ -97,5 +97,33 @@ async function getReader(line)
             break;
         }
         num++;
+    }
+
+    makeScoreFromScoreData();
+}
+
+async function makeScoreFromScoreData()
+{
+    await makeNewScore();
+    let numLine = 0;
+
+    for (let i = 1; i <= score.length; i++)
+    {
+        if (score[i][5] != undefined)
+        {   
+            let j = 0;
+            while (j === 0 || score[i][5] == undefined)
+            {
+                console.log("vgahjc");
+                document.getElementById("numBar").innerHTML = ""
+                await makeNewScore();
+        
+                for (let k = 0; k < 4; k++)
+                {
+                    let notes = document.getElementById(`notes_${i}${j}${k}`);
+                    notes.innerHTML = NOTES_SYMBOL[score[j][k]];
+                }
+            }
+        }
     }
 }

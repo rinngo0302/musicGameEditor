@@ -1,5 +1,10 @@
 text = "";
 
+async function fileExport()
+{
+    convertArryToString();
+}
+
 async function convertArryToString()
 {
     for (let i = 0; i < score.length; i++)
