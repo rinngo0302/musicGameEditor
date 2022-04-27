@@ -26,17 +26,18 @@ async function readFile(e)
         
         getReader(line);
 
-        makeScoreFromScoreData();
+        // makeScoreFromScoreData();
     });
 }
 
 let textCursor = 0;
+let tmpscore;
 function getReader(line)
 {
-    score = new Array(line + 1);
+    tmpscore = new Array(line + 1);
     for (let i = 0; i < line + 1; i++)
     {
-        score[i] = new Array(6);
+        tmpscore[i] = new Array(6);
     }
 
     let num = 0;
@@ -67,9 +68,9 @@ function getReader(line)
             {
                 if (getc === "")
                 {
-                    score[num][i] = undefined;
+                    tmpscore[num][i] = undefined;
                 } else {
-                    score[num][i] = getc;
+                    tmpscore[num][i] = getc;
                 }
                 console.log(`getc: ${getc}`);
                 getc = "";
@@ -104,25 +105,63 @@ function getReader(line)
 
 async function makeScoreFromScoreData()
 {
-    await makeNewScore();
-    let numLine = 0;
+    // await makeNewScore();
 
-    for (let i = 1; i <= score.length; i++)
+    for (let i = 0; i < tmpscore.length; i++)
     {
-        if (score[i][5] != undefined)
-        {   
-            let j = 0;
-            while (j === 0 || score[i][5] == undefined)
+        let countLine = 0;
+        if (tmpscore[i][5] != undefined && i !== tmpscore.length - 1)
+        {
+            // console.log(`tmpscore[i][5]: ${tmpscore[i][5]}`);
+            // 1小節内に何個Lineがあるかを計算
+            let j = i;
+            countLine = 0;
+            while (i === j || tmpscore[j][5] === undefined)
             {
-                console.log("vgahjc");
-                document.getElementById("numBar").innerHTML = ""
-                await makeNewScore();
-        
-                for (let k = 0; k < 4; k++)
+                countLine++;
+                
+                if (j >= tmpscore.length - 1)
                 {
-                    let notes = document.getElementById(`notes_${i}${j}${k}`);
-                    notes.innerHTML = NOTES_SYMBOL[score[j][k]];
+                    // console.log(`////InFor////\ni: ${i}\nj: ${j}\n\ncountLine: ${countLine}\n\nscore[j][5]: ${score[j][5]}\n////InFor////`);
+                    break;
                 }
+
+                j++;
+            }
+            
+            console.log(`BPM: ${tmpscore[i][4]}\nnumBar: ${tmpscore[i][5]}\ncountLine: ${countLine}\ni: ${i}`);
+            await makeNewScore(tmpscore[i][4], countLine);
+
+            // await makeNewScore(score[i][4], 5);
+            console.log(`i: ${i}`);
+        }
+
+        console.log(`i: ${i}`);
+        // _notes[section][line][]
+    }
+
+    score = tmpscore;
+
+    let tmpNumLine = -1;
+    for (let i = 1; i <= maxSection; i++)
+    {
+        for (let j = 1; j <= allSection[i - 1]; j++)
+        {
+            tmpNumLine += 1;
+            for (let k = 0; k < 4; k++)
+            {
+                let note = document.getElementById(`notes_${i}${j}${k}`);
+                
+                // がんばってこのコード↓書いたから残しといてあげる
+                // for (let l = 0; l < i - 1; l++)
+                // {
+                //     tmpNumLine += allSection[l];
+                // }
+                // tmpNumLine += j;
+
+                // console.log(`i: ${i}\nj: ${j}\nk: ${k}\ntmpNumLine: ${tmpNumLine}`);
+                note.innerHTML = NOTES_SYMBOL[score[tmpNumLine][k]];
+                console.log(`\n\nNOTES_SYMBOL[score[tmpNumLine][k]]: ${NOTES_SYMBOL[score[tmpNumLine][k]]}`);
             }
         }
     }

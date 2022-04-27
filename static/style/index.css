@@ -94,8 +94,8 @@ tr, th, td {
 }
 
 .score {
-    overflow-y: scroll;
-    height: 700px;
+    /* overflow-y: scroll;
+    height: 700px; */
 }
 table {
     margin: 0 auto;
