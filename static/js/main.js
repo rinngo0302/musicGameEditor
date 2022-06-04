@@ -100,6 +100,10 @@ async function makeNewScore(bpm, numBar)
         tr.setAttribute("id", `line_${maxLine}`);
 
         let th = document.createElement("th");
+        if (i === 1)// 最初のTH
+        {
+            th.setAttribute("class", "firstTh");
+        }
         th.innerHTML = `${i}`;
         tr.appendChild(th);
         section.innerHTML = maxSection;
@@ -107,7 +111,7 @@ async function makeNewScore(bpm, numBar)
         for (let j = 0; j < 4; j++)
         {   
             let td = document.createElement("td");
-            td.innerHTML = `<button id='notes_${maxSection}${i}${j}' onclick='changeNotes(${maxSection}, ${i}, ${j}, ${maxLine})'> ・ </button>`;
+            td.innerHTML = `<button id='notes_${maxSection}${i}${j}' class='notes_button' onclick='changeNotes(${maxSection}, ${i}, ${j}, ${maxLine})'> ・ </button>`;
             tr.appendChild(td);
         }
         
@@ -141,87 +145,6 @@ async function makeNewScore(bpm, numBar)
 
     hasSet = true;
 }
-// async function makeNewScore()
-// {
-//     hasSet = false;
-//     maxSection++;
-
-//     let bpm = document.getElementById("numBPM").value;
-
-//     let section = document.createElement("th");
-//     let bpmEl = document.createElement("input");
-//     bpmEl.setAttribute("type", "text");
-//     bpmEl.setAttribute("class", "bpm");
-//     bpmEl.setAttribute("value", bpm);
-//     bpmEl.setAttribute("id", `bpm_${maxSection}`);
-//     let numBar = document.getElementById("numBar");
-//     // alert(`${numBar.value}小節の譜面をつくります。`);
-
-//     for (let i = 1; i <= numBar.value; i++)
-//     {
-//         // 譜面のデータの配列
-//         score.push(new Array(6));
-//         if (!hasSet)
-//         {
-//             score[maxLine][5] = `${maxSection}`;
-//             score[maxLine][4] = bpm;   // BPM設定
-
-//             hasSet = true;
-//         }
-
-//         // 配列の初期化
-//         for (let i = 0; i < 4; i++)
-//         {
-//             score[maxLine][i] = "-1";
-//         }
-//         maxLine++;
-
-//         let tr = document.createElement("tr");
-//         tr.setAttribute("id", `line_${maxLine}`);
-
-//         let th = document.createElement("th");
-//         th.innerHTML = `${i}`;
-//         tr.appendChild(th);
-//         section.innerHTML = maxSection;
-        
-//         for (let j = 0; j < 4; j++)
-//         {   
-//             let td = document.createElement("td");
-//             td.innerHTML = `<button id='notes_${maxSection}${i}${j}' onclick='changeNotes(${maxSection}, ${i}, ${j}, ${maxLine})'> ・ </button>`;
-//             tr.appendChild(td);
-//         }
-        
-//         // "-"のプログラム
-//         let selectnow = document.createElement("td");
-//         let selectButton = document.createElement("button");
-//         selectButton.setAttribute("id", `select_${maxLine}`);
-//         selectButton.setAttribute("name", `select`);
-//         selectButton.setAttribute("onclick", `selectNow(${maxSection}, ${maxLine});`);
-//         selectButton.innerHTML = "ー";
-//         selectnow.appendChild(selectButton);
-
-//         tr.appendChild(selectnow);
-//         if (i === 1)
-//         {
-//             tr.appendChild(section);
-//             tr.appendChild(bpmEl);
-//         }
-
-//         let lastTr = document.getElementById(`line_${maxLine - 1}`);
-//         let table = document.getElementsByTagName("table")[0];
-
-//         table.insertBefore(tr, lastTr);
-//         // score.appendChild(tr);
-
-//         showSelection();
-
-//     }
-
-//     allMaxLine.push(maxLine);
-//     allSection.push(numBar.value);
-
-//     hasSet = true;
-// }
 
 async function selectAudioFile(e)
 {

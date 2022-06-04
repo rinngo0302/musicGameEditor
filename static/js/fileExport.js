@@ -7,6 +7,7 @@ async function fileExport()
 
 async function convertArryToString()
 {
+    text = "";
     for (let i = 0; i < score.length; i++)
     {
         for (let j = 0; j < 6; j++)
@@ -35,4 +36,7 @@ async function convertArryToString()
         // text += ",";
         text += "\n";
     }
+
+    let textel = document.getElementById("text");
+    textel.innerHTML = text;
 }
