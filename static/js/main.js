@@ -374,7 +374,7 @@ async function setCurrentTime()
         console.log(speed);
         speed *= 4 / allSection[nowSection - 1];
         tmpCurrent += speed;
-        // console.log(speed);
+        console.log(speed);
     }
     music.currentTime = tmpCurrent;
     console.log(music.currentTime);
