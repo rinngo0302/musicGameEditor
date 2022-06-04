@@ -8,6 +8,7 @@ main {
 .container {
     display: flex;
     justify-content: center;
+
 }
 
 .makeScore {
@@ -86,6 +87,10 @@ tr, th, td {
     height: 10px;
 }
 
+.firstTh {
+    color: #ff1f1f;
+}
+
 #cur {
     border-color: red;
     border-style: solid;
@@ -94,22 +99,29 @@ tr, th, td {
 }
 
 .score {
-    /* overflow-y: scroll;
-    height: 700px; */
+    overflow-y: scroll;
+    height: 100%;
 }
 table {
     margin: 0 auto;
 }
 
-th {
-    width: 50px;
-    height: 50px;
+tr {
+    height: 5px;
+}
 
-    font-size: 23px;
+td {
+    font-size: 30px;
 }
 
 td button {
-    font-size: 30px;
+    font-size: 17px;
+    font-weight: 20px;
+
+    text-align: center;
+
+    width: 30px;
+    height: 30px;
 }
 
 .bpm {
@@ -129,4 +141,18 @@ td button {
     border-right: 0px;
 
     position: relative;
+}
+
+#text {
+    margin: 0 auto;
+
+    position: relative;
+    left: -30px;
+
+    width: 155px;
+    height: 100px;
+}
+
+button {
+    cursor: pointer;
 }
