@@ -33,7 +33,8 @@ async function changeNotes(section, row, line, mLine)
     let notes = document.getElementById(`notes_${section}${row}${line}`);
     notes.innerHTML = (notes.innerHTML === NOTES_SYMBOL[cursor]) ? NOTES_SYMBOL[NONE] : NOTES_SYMBOL[cursor];
 
-    score[mLine - 1][line] = `${cursor}`;
+    console.log(`mLine - 1: ${mLine - 1}, section: ${section}, row: ${row}, line: ${line}`);
+    score[mLine - 1][line] = (`${cursor}` === score[mLine - 1][line]) ? "-1" : `${cursor}`;
 }
 
 async function changeNotesMode(mode)
