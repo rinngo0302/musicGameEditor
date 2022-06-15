@@ -19,6 +19,8 @@ let file;
 let music;  // 曲のデータ
 let isPlayingMusic = false;
 
+let se;     // 効果音
+
 let NOTES_SYMBOL = ["〇", "□", "■", "×"];
 NOTES_SYMBOL[-1] = "・";
 
@@ -26,6 +28,8 @@ onload = function()
 {
     let score = document.getElementById("score");
     score.style.height = `${window.innerHeight - 200}px`;
+
+    se = new Audio("static/SE/suzu.mp3");
 }
 
 async function changeNotes(section, row, line, mLine)
@@ -195,6 +199,15 @@ async function updateSelection()
         } else {
             stopMusic();
             console.log("Not Playing!");
+        }
+
+        for (let i = 0; i < 4; i++)
+        {
+            if (score[nowLine][i] != `${NONE}` && score[nowLine][i] != `${ATTACK}`)
+            {
+                let se = new Audio("static/SE/suzu.mp3");
+                se.play();
+            }
         }
     }, nowSpeed * 1000);
 }
