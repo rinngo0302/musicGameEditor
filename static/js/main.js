@@ -182,6 +182,15 @@ async function updateSelection()
         await calcSpeed();
         if (isPlayingMusic && nowLine < maxLine)
         {
+            for (let i = 0; i < 4; i++)
+            {
+                if (score[nowLine][i] != `${NONE}` && score[nowLine][i] != `${ATTACK}`)
+                {
+                    let se = new Audio("static/SE/suzu.mp3");
+                    se.play();
+                }
+            }
+            
             console.log("Playing!");
             nowLine++;
             setNowSectionFromNowLine();
@@ -199,15 +208,6 @@ async function updateSelection()
         } else {
             stopMusic();
             console.log("Not Playing!");
-        }
-
-        for (let i = 0; i < 4; i++)
-        {
-            if (score[nowLine][i] != `${NONE}` && score[nowLine][i] != `${ATTACK}`)
-            {
-                let se = new Audio("static/SE/suzu.mp3");
-                se.play();
-            }
         }
     }, nowSpeed * 1000);
 }
