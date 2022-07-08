@@ -19,6 +19,8 @@ let file;
 let music;  // 曲のデータ
 let isPlayingMusic = false;
 
+let se;     // 効果音
+
 let NOTES_SYMBOL = ["〇", "□", "■", "×"];
 NOTES_SYMBOL[-1] = "・";
 
@@ -26,6 +28,8 @@ onload = function()
 {
     let score = document.getElementById("score");
     score.style.height = `${window.innerHeight - 200}px`;
+
+    se = new Audio("static/SE/suzu.mp3");
 }
 
 async function changeNotes(section, row, line, mLine)
@@ -33,7 +37,8 @@ async function changeNotes(section, row, line, mLine)
     let notes = document.getElementById(`notes_${section}${row}${line}`);
     notes.innerHTML = (notes.innerHTML === NOTES_SYMBOL[cursor]) ? NOTES_SYMBOL[NONE] : NOTES_SYMBOL[cursor];
 
-    score[mLine - 1][line] = `${cursor}`;
+    console.log(`mLine - 1: ${mLine - 1}, section: ${section}, row: ${row}, line: ${line}`);
+    score[mLine - 1][line] = (`${cursor}` === score[mLine - 1][line]) ? "-1" : `${cursor}`;
 }
 
 async function changeNotesMode(mode)
@@ -177,6 +182,15 @@ async function updateSelection()
         await calcSpeed();
         if (isPlayingMusic && nowLine < maxLine)
         {
+            for (let i = 0; i < 4; i++)
+            {
+                if (score[nowLine][i] != `${NONE}` && score[nowLine][i] != `${ATTACK}`)
+                {
+                    let se = new Audio("static/SE/suzu.mp3");
+                    se.play();
+                }
+            }
+            
             console.log("Playing!");
             nowLine++;
             setNowSectionFromNowLine();

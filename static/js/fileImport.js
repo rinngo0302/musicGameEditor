@@ -34,14 +34,14 @@ let textCursor = 0;
 let tmpscore;
 function getReader(line)
 {
-    tmpscore = new Array(line + 1);
-    for (let i = 0; i < line + 1; i++)
+    tmpscore = new Array(line + 2);
+    for (let i = 0; i < tmpscore.length; i++)
     {
         tmpscore[i] = new Array(6);
     }
 
     let num = 0;
-    let now = 1;
+    let now = 0;
     
     while (true)
     {
@@ -92,7 +92,7 @@ function getReader(line)
             }
         }
         
-        if (num >= line)
+        if (num > line)
         {
             // alert("終了！");
             break;
