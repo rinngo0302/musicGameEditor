@@ -256,9 +256,9 @@ async function showSelection()
     // trの色変更
     for (let i = 1; i <= maxLine; i++)
     {
-        document.getElementById(`select_${i}`).style.backgroundColor = "#9f9f9f";
+        document.getElementById(`select_${i}`).style.backgroundColor = "#aaaaaa";
     }
-    document.getElementById(`select_${nowLine}`).style.backgroundColor = "#aaaaaa";
+    document.getElementById(`select_${nowLine}`).style.backgroundColor = "#396e9a";
 }
 
 // BPMから一つのノーツあたり何秒かかるかを計算
