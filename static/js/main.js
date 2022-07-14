@@ -155,6 +155,9 @@ async function selectAudioFile(e)
 {
     file = document.getElementById("getFile").files[0];
 
+    let musictitle = document.getElementById("musicTitle");
+    musictitle.innerText = file.name;
+
     music = new Audio(file.name);
     music.currentTime = 0;
 
@@ -253,7 +256,7 @@ async function showSelection()
     // trの色変更
     for (let i = 1; i <= maxLine; i++)
     {
-        document.getElementById(`select_${i}`).style.backgroundColor = "#e4f5e1";
+        document.getElementById(`select_${i}`).style.backgroundColor = "#9f9f9f";
     }
     document.getElementById(`select_${nowLine}`).style.backgroundColor = "#aaaaaa";
 }
