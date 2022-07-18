@@ -23,7 +23,11 @@
             <div class="container">
                 <div>
                     <div class="makeScore">
-                        <input type="file" onchange="selectAudioFile(event)" id="getFile"> <br><br>
+                        <label class="musicLabel">
+                            <input type="file" onchange="selectAudioFile(event)" id="getFile" name="曲選択">
+                            <div id="musicTitle"> 曲 </div>
+                        </label>
+                        <br>
                         <label> 拍 </label><input type="text" id="numBar"> <br>
                         <label> BPM </label> <input type="text" id="numBPM">      <br> <br>
                         <button onclick="sendDataToMakeNewScore()"> 新規小節作成 </button> <br>
@@ -62,14 +66,15 @@
                     </div>
     
                     <div class="controler" style="width: 100px;">
-                        <input type="file" onchange="readFile(event)">
+                        <label class="csvLabel">
+                            <input type="file" onchange="readFile(event)">.csv
+                        </label>
                         <button id="fileExport" onclick="fileExport()"> Export </button>
                         <textarea id="text" placeholder="score data..."></textarea>
                     </div>
                 </div>
             </div>
         </main>
-
         <br><br><br>
     </body>
 </html>

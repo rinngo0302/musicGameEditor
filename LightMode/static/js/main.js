@@ -236,8 +236,6 @@ function getSectionFromLine(line)
 
 async function selectNow(section, line)
 {
-    stopMusic();
-    
     // 選択されている要素の選択
     nowLine = line;
     nowSection = section;
