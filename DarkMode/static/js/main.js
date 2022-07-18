@@ -156,9 +156,16 @@ async function selectAudioFile(e)
     file = document.getElementById("getFile").files[0];
 
     let musictitle = document.getElementById("musicTitle");
-    musictitle.innerText = file.name;
-
-    music = new Audio(`scores/${file.name}/${file.name}`);
+    
+    let musicname = String();
+    for (let i = 0; i < file.name.length - 4; i++)
+    {
+        console.log(file.name[i]);
+        musicname += file.name[i];
+    }
+    console.log(musicname);
+    musictitle.innerText = `${musicname}`;
+    music = new Audio(`scores/${musicname}/${file.name}`);
     music.currentTime = 0;
 
     calcSpeed();
