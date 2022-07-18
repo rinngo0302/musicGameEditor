@@ -158,7 +158,7 @@ async function selectAudioFile(e)
     let musictitle = document.getElementById("musicTitle");
     musictitle.innerText = file.name;
 
-    music = new Audio(file.name);
+    music = new Audio(`scores/${file.name}/${file.name}`);
     music.currentTime = 0;
 
     calcSpeed();
