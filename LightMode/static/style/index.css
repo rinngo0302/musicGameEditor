@@ -1,0 +1,158 @@
+body {
+    text-align: center;
+}
+
+main {
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+
+}
+
+.makeScore {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 370px;
+    
+    border-color: black;
+    border-style: solid;
+
+    padding-left: 50px;
+    padding-right: 50px;
+
+    margin-right: 50px;
+}
+
+.musicAudio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 300px;
+    
+    border-color: black;
+    border-style: solid;
+
+    padding-left: 50px;
+    padding-right: 50px;
+
+    margin-right: 50px;
+}
+
+.startMusic {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    font-size: 20px;
+
+    background: #fca655;
+}
+.stopMusic {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    font-size: 20px;
+
+    background: #55abfc;
+}
+
+.controler {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    height: 300px;
+    
+    border-color: black;
+    border-style: solid;
+    
+    padding-left: 50px;
+    padding-right: 50px;
+
+    margin-left: 100px;
+}
+
+tr, th, td {
+    width: 10px;
+    height: 10px;
+}
+
+.firstTh {
+    color: #ff1f1f;
+}
+
+#cur {
+    border-color: red;
+    border-style: solid;
+
+    font-size: 50px;
+}
+
+.score {
+    overflow-y: scroll;
+    height: 100%;
+}
+table {
+    margin: 0 auto;
+}
+
+tr {
+    height: 5px;
+}
+
+td {
+    font-size: 30px;
+}
+
+td button {
+    font-size: 17px;
+    font-weight: 20px;
+
+    text-align: center;
+
+    width: 30px;
+    height: 30px;
+}
+
+.bpm {
+    text-align: center;
+
+    width: 50px;
+    height: 30px;
+
+    font-size: 20px;
+}
+
+.now {
+    height: 1px;
+    border: solid red;
+    border-left: 0px;
+    border-top: 0px;
+    border-right: 0px;
+
+    position: relative;
+}
+
+#text {
+    margin: 0 auto;
+
+    position: relative;
+    left: -30px;
+
+    width: 155px;
+    height: 100px;
+}
+
+button {
+    cursor: pointer;
+}

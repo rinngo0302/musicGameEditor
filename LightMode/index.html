@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title> 音ゲー 譜面エディタ </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/style/index.css">
+    </head>
+    
+    <script src="static/js/main.js"></script>
+    <script src="static/js/fileImport.js"></script>
+    <script src="static/js/fileExport.js"></script>
+
+    <body>
+        <header>
+            <h1> 音ゲー 譜面エディタ </h1>
+        </header>
+        <br>
+        <br>
+        
+        <main>
+            <div class="container">
+                <div>
+                    <div class="makeScore">
+                        <input type="file" onchange="selectAudioFile(event)" id="getFile"> <br><br>
+                        <label> 拍 </label><input type="text" id="numBar"> <br>
+                        <label> BPM </label> <input type="text" id="numBPM">      <br> <br>
+                        <button onclick="sendDataToMakeNewScore()"> 新規小節作成 </button> <br>
+                        <button onclick="deleteSection()"> 小節削除 </button> <br>
+                    </div>
+
+                    <div class="musicAudio">
+                        <button class="startMusic" onclick="startMusic()"> Start </button>
+                        <button class="stopMusic" onclick="stopMusic()"> Stop </button>
+                    </div>
+                </div>
+
+                <div class="score" id="score">
+                    <table border="1" id="score">
+                        <tr>
+                            <th>行</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th></th>
+                            <th>小節</th>
+                            <th>BPM</th>
+                        </tr>
+                    </table>    
+                </div>
+                
+                <div style="display: flex; flex-direction: column;">
+                    <div class="controler">
+                        <div id="cur"> ・ </div>
+                        <button onclick="changeNotesMode('pointer')"> ポインタ・ </button>
+                        <button onclick="changeNotesMode('tap')"> タップ〇 </button>
+                        <button onclick="changeNotesMode('holdStart')"> ホールド始点 □ </button>
+                        <button onclick="changeNotesMode('holdEnd')"> ホールド終点 ■ </button>
+                        <button onclick="changeNotesMode('attack')"> アタック× </button>
+                    </div>
+    
+                    <div class="controler" style="width: 100px;">
+                        <input type="file" onchange="readFile(event)">
+                        <button id="fileExport" onclick="fileExport()"> Export </button>
+                        <textarea id="text" placeholder="score data..."></textarea>
+                    </div>
+                </div>         
+            </div>
+        </main>
+
+        <br><br><br>
+    </body>
+</html>
