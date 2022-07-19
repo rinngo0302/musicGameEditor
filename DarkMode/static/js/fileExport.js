@@ -37,6 +37,7 @@ async function convertArryToString()
         text += "\n";
     }
 
+    text = text.slice(0, -1);
     let textel = document.getElementById("text");
     textel.innerHTML = text;
 }
